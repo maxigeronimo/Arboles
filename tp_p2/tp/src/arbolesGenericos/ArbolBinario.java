@@ -8,6 +8,43 @@ public class ArbolBinario<T extends Comparable<T>> {
         this.raiz = null;
     }
 
+	// Metodo publico: inicia el proceso de intercambio desde la raiz
+	public void intercambiarConMayorHijo() {
+		intercambiarConMayorHijo(raiz);
+	}
+
+	// Metodo recursivo que recorre el arbol y realiza intercambios
+	private void intercambiarConMayorHijo(Nodo<T> nodo) {
+		// Caso base: si el nodo es null no hay nada que hacer
+		if (nodo == null) return;
+		// Recorrido postorden:
+		// primero hijos, luego el nodo actual
+		intercambiarConMayorHijo(nodo.izq);
+		intercambiarConMayorHijo(nodo.der);
+		// Solo se puede comparar si el nodo tiene ambos hijos
+		if (nodo.izq != null && nodo.der != null) {
+			// Obtenemos valores de los hijos
+			T valIzq = nodo.izq.elemento;
+			T valDer = nodo.der.elemento;
+			// Comparamos los hijos para ver cuál es mayor
+			if (valIzq.compareTo(valDer) > 0) {
+				// Intercambia el nodo con el hijo izquierdo
+				T temp = nodo.elemento;
+				nodo.elemento = valIzq;
+				nodo.izq.elemento = temp;
+			} else {
+				// Intercambia el nodo con el hijo derecho
+				T temp = nodo.elemento;
+				nodo.elemento = valDer;
+				nodo.der.elemento = temp;
+			}
+		}
+	}
+
+
+
+
+
     // Imprime todos los nodos de un nivel especifico
     public void imprimirNivel(int nivel) {
         // Si el arbol esta vacio no hace nada
