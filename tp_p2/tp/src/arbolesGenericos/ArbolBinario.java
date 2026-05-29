@@ -73,6 +73,9 @@ public class ArbolBinario<T extends Comparable<T>> {
         if (nodo == null) return null;
         // Si encuentra el elemento retorna el nodo
         // compareTo == 0 significa iguales
+		// igual retorna 0
+		// mayor 1
+		// menor -1
         if (nodo.elemento.compareTo(aBuscar) == 0)
             return nodo;
         // Busca primero en el subarbol izquierdo

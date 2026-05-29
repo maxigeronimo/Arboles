@@ -15,6 +15,9 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>>
         if (nodo == null)
             return new Nodo<>(elem);
         // Si el elemento es menor, va a la izquierda
+		// igual retorna 0
+		// mayor 1
+		// menor -1
         if (elem.compareTo(nodo.elemento) < 0)
             nodo.izq = agregar(nodo.izq, elem);
         // Si el elemento es mayor, va a la derecha
