@@ -8,11 +8,55 @@ public class ArbolBinario<T extends Comparable<T>> {
         this.raiz = null;
     }
 
+	// Devuelve los nodos cuya cantidad de hijos coincide con la paridad del nivel
+	// Recorrido en PostOrden
+	// Si el árbol está vacío retorna null
+	public String nodosParidadPostOrden() {
+
+		// Caso base: árbol vacío
+		if (this.estaVacio())
+			return null;
+
+		return "{ " + nodosParidadPostOrden(this.raiz, 1) + "}";
+	}
+	private String nodosParidadPostOrden(Nodo<T> nodo, int nivel) {
+
+		// Caso base
+		if (nodo == null)
+			return "";
+
+		// POSTORDEN: izquierda -> derecha -> nodo
+		String textoIzq = nodosParidadPostOrden(nodo.izq, nivel + 1);
+		String textoDer = nodosParidadPostOrden(nodo.der, nivel + 1);
+
+		// Contar hijos
+		int hijos = 0;
+
+		if (nodo.izq != null)
+			hijos++;
+
+		if (nodo.der != null)
+			hijos++;
+
+		// Paridad del nivel
+		boolean nivelPar = (nivel % 2 == 0);
+
+		String actual = "";
+
+		// Nivel par → 0 hijos
+		// Nivel impar → 1 hijo
+		if ((nivelPar && hijos == 0) || (!nivelPar && hijos == 1)) {
+			actual = nodo.elemento + " ";
+		}
+
+		// Concatenación en postorden
+		return textoIzq + textoDer + actual;
+	}
+
 	// Metodo publico: inicia el proceso de intercambio desde la raiz
 	public void intercambiarConMayorHijo() {
 		intercambiarConMayorHijo(raiz);
 	}
-
 	// Metodo recursivo que recorre el arbol y realiza intercambios
 	private void intercambiarConMayorHijo(Nodo<T> nodo) {
 		// Caso base: si el nodo es null no hay nada que hacer
@@ -40,10 +84,6 @@ public class ArbolBinario<T extends Comparable<T>> {
 			}
 		}
 	}
-
-
-
-
 
     // Imprime todos los nodos de un nivel especifico
     public void imprimirNivel(int nivel) {

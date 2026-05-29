@@ -68,8 +68,28 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>>
 		return maximaHoja(nodo.izq);
 	}
 
+public boolean pertenecenComplementos(Integer total) {
+    return pertenecenComplementosRec(raiz, total);
+}
 
-
-
-
+private boolean pertenecenComplementosRec(Nodo<T> nodo, Integer total) {
+    if (nodo == null) {
+        return true; // nodo vacío no rompe la condición
+    }
+    // Convertimos el elemento a Integer (asumimos ABB<Integer>)
+    Integer valor = (Integer) nodo.elemento;
+    // Si valor es 0 o no divide al total, no hay complemento
+    if (valor == 0 || total % valor != 0) {
+        return false;
+    }
+    // Calculamos el complemento necesario
+    Integer complemento = total / valor;
+    // Si el complemento no está en el árbol, falla
+    if (!buscar((T) complemento)) {
+        return false;
+    }
+    // Verificamos recursivamente en los hijos
+    return pertenecenComplementosRec(nodo.izq, total) 
+        && pertenecenComplementosRec(nodo.der, total);
+}
 }
