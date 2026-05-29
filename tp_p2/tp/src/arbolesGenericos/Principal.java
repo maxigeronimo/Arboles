@@ -4,11 +4,11 @@ package arbolesGenericos;
 public class Principal {
 	public static void main(String[] args) {
 		//Ejercicio AB
-		// ArbolBinario<Integer> ab = construirABEjemplo();
+		ArbolBinario<Integer> ab = construirABEjemplo();
 
-        // String resultado = ab.nodosParidadPostOrden();
+        String resultado = ab.nodosParidadPostOrden();
 
-        // System.out.println(resultado);
+        System.out.println(resultado);
 		
 		//Ejercicio ABB
 		construirABBEjemplo();
