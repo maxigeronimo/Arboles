@@ -1,33 +1,44 @@
 package arbolesGenericos;
 
 
-public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<T> {
+public class ArbolBinarioBusqueda<T extends Comparable<T>>
+        extends ArbolBinario<T> {
 
-	public void agregar(T elem) {
-		this.raiz = agregar(raiz, elem);
-	}
-	
-	private Nodo<T> agregar(Nodo<T> nodo, T elem) {
-		if (nodo == null) return new Nodo<>(elem);
-		if (elem.compareTo(nodo.elemento) < 0)
-			nodo.izq = agregar(nodo.izq, elem);
-		else if (elem.compareTo(nodo.elemento) > 0)
-			nodo.der = agregar(nodo.der, elem);
-		return nodo;
-	}
-	
-	//INORDER: izq raiz der
-	public void inOrder() {
-		inOrder(this.raiz);
-	}
-	
-	private void inOrder(Nodo<T> nodo) {
-		if(nodo==null) return;
-		inOrder(nodo.izq);
-		System.out.println(nodo);
-		inOrder(nodo.der);
-	}
-	
-    
+    // Metodo publico para agregar un elemento al ABB
+    public void agregar(T elem) {
+        this.raiz = agregar(raiz, elem);
+    }
 
+    // Metodo recursivo para insertar un nodo
+    private Nodo<T> agregar(Nodo<T> nodo, T elem) {
+        // Si el nodo es null, crea uno nuevo
+        if (nodo == null)
+            return new Nodo<>(elem);
+        // Si el elemento es menor, va a la izquierda
+        if (elem.compareTo(nodo.elemento) < 0)
+            nodo.izq = agregar(nodo.izq, elem);
+        // Si el elemento es mayor, va a la derecha
+        else if (elem.compareTo(nodo.elemento) > 0)
+            nodo.der = agregar(nodo.der, elem);
+        // Retorna el nodo actual
+        return nodo;
+    }
+
+    // INORDER: izquierda -> raiz -> derecha
+    // En un ABB imprime los elementos ordenados
+    public void inOrder() {
+        inOrder(this.raiz);
+    }
+
+    // Recorrido recursivo inOrder
+    private void inOrder(Nodo<T> nodo) {
+        // Caso base
+        if (nodo == null) return;
+        // Recorre subarbol izquierdo
+        inOrder(nodo.izq);
+        // Imprime la raiz
+        System.out.println(nodo);
+        // Recorre subarbol derecho
+        inOrder(nodo.der);
+    }
 }
